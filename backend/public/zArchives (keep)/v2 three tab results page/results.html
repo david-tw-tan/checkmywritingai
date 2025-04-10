@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essay AI Feedback</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Importing Raleway font -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="results.css">
+
+  <style>
+  .shadows-into-light-two-regular {
+    font-family: "Shadows Into Light Two", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .roboto-sans {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
+  </style>
+
+  <body>
+
+      <div class="logo-header">
+          <img class="logo-header-img" src="images/logo.png" alt="Write Strong AI Logo">
+      </div>
+
+      <div class="container">
+
+        <div class="progress-bar">
+          <div class="progress-step active" onclick="goToSection(0)">Basic<br>Review</div>
+          <div class="progress-step" onclick="goToSection(1)">Grammar<br>Explanation</div>
+          <div class="progress-step" onclick="goToSection(2)">Advanced<br>Tips</div>
+        </div>
+
+
+        <!-- PAGE ONE - BASIC CHECK -->
+          <section class="card" id="basic-review">
+              <h2>Writing Basic Review</h2>
+              <img id="thumbnail-image" alt="Uploaded writing sample" src="sample1.jpg">
+              <h3>Original (with markup):</h3>
+              <div class="essay-original" id="markup-essay"></div>
+              <h3>AI Assessment:</h3>
+              <div class="assess-clean" id="ai-assess"></div>
+              <div><br></div>
+          </section>
+
+        <!-- PAGE TWO - GRAMMAR EXPLANATIONS -->
+
+          <section class="card" id="grammar-explanation">
+              <h2>Grammar Explanation</h2>
+              <ul id="grammar-list"></ul>
+          </section>
+
+
+        <!-- PAGE THREE - ADVANCED TIPS -->
+
+          <section class="card" id="next-level" >
+              <h2>Level Up!<br>Advanced Writing Tips</h2>
+              <ul id="tip-list"></ul>
+
+              <!-- See Entire Essay Button -->
+              <div class="essay-button-container" style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+                <button id="seeEssayBtn" class="essay-button">View as single revision</button>
+              </div>
+
+              <!-- Popup for the entire essay -->
+              <div id="essayPopup" class="essay-popup">
+                <div class="essay-popup-content">
+                  <span class="essay-popup-close">&times;</span>
+                  <h2 style="margin-bottom: -10px;">Revised Writing Sample</h2>
+                  <!-- <h6 style="margin-bottom: -30px; color: #004085; font-style: italic"><b>(for consideration only)</b></h6> -->
+                  <h6 style="margin-bottom: -30px; color: orangered; font-style: italic; font-weight: 300;"><b>(for consideration only)</b></h6>
+                  <div class="essay-popup-text"></div>
+                </div>
+              </div>
+
+          </section>
+
+
+        <!-- PAGINATION BUTTONS -->
+
+          <div class="navigation-links">
+              <a href="#" class="nav-link previous previous-button" id="prevBtn" onclick="navigate(-1); goToSection('prev');">
+                <span class="nav-arrow" style="transform: rotate(180deg);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </span>
+                  <span class="nav-text" style="text-align: left;"><span class="button_prelabel">Back:</span><br><span id="prevLabel">Advanced Writing Tips</span></span>
+              </a>
+              <a href="#" class="nav-link next next-button" id="nextBtn" onclick="navigate(1);">
+                  <span class="nav-text" style="text-align: right;"><span class="button_prelabel">Next:</span><br><span id="nextLabel">Grammar Explanation</span></span>
+                  <span class="nav-arrow">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                  </span>
+              </a>
+          </div>
+
+
+      </div>
+
+</body>
+
+<script src="results.js"></script>
+
+<footer style="visibility: hidden;">© 2025 CheckMyWritingAI Inc. All rights reserved.</footer>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essay AI Feedback</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- sweet alerts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Importing Raleway font -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="results.css">
+
+  <style>
+  .shadows-into-light-two-regular {
+    font-family: "Shadows Into Light Two", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  </style>
+
+  <body>
+
+      <div class="container">
+
+        <div class="progress-bar">
+          <div class="progress-step active" onclick="goToSection(0)">Basic Review</div>
+          <div class="progress-step" onclick="goToSection(1)">Level Up!</div>
+        </div>
+
+
+        <!-- PAGE ONE - BASIC CHECK -->
+          <section class="card" id="basic-review">
+              <h2>Writing Basic Review</h2>
+              <img id="thumbnail-image" alt="Uploaded writing sample" src="sample1.jpg">
+              <h3>Original (with markup):</h3>
+              <div class="essay-original" id="markup-essay"></div>
+              <h3>A Few Reminders:</h3>
+              <ul id="grammar-list"></ul>
+              <h3>AI Assessment:</h3>
+              <div class="assess-clean" id="ai-assess"></div>
+              <div><br></div>
+          </section>
+
+
+        <!-- PAGE THREE - ADVANCED TIPS -->
+
+          <section class="card" id="next-level" >
+              <h2 style="padding-bottom: 5px;">Level Up!</h2>
+              <h3 style="padding-top: 0px; margin-bottom: -12px;">Advanced Writing Tips</h3>
+
+              <div style="text-align: center; margin-bottom: 8px;">
+                <h6 class="grade-level-link">
+                  View writing level guide
+                  <img src="images/icon_info.png" alt="Info" class="info-icon" />
+                </h6>
+              </div>
+
+              <ul id="tip-list"></ul>
+
+              <!-- See Entire Essay Button -->
+              <div class="essay-button-container" style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+                <button id="seeEssayBtn" class="essay-button">View as single revision</button>
+              </div>
+
+
+              <div style="text-align: center; margin-bottom: 8px;">
+                <h6 class="grade-level-link2" style="padding-top: 25px; color: black;">
+                  Unsure of your child's target writing level?<br><span style="color: dodgerblue;">Click here</span> for our grade-level guide
+                </h6>
+              </div>
+
+              <!-- Popup for the entire essay -->
+              <div id="essayPopup" class="essay-popup">
+                <div class="essay-popup-content">
+                  <span class="close-btn"></span>
+                  <h2 style="margin-bottom: -20px;">Revised Writing Sample</h2>
+                  <h6 style="margin-bottom: -20px; color: orangered; font-style: italic; font-weight: 300;"><b>(for consideration only)</b></h6>
+                  <div class="essay-popup-text"></div>
+                </div>
+              </div>
+
+          </section>
+
+
+        <!-- PAGINATION BUTTONS -->
+
+        <div class="navigation-links">
+          <a href="#" class="nav-link previous" id="prevBtn" onclick="navigate('prev')">
+            <div class="nav-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+            <span class="nav-text">
+              <span class="button_prelabel">Back:</span>
+              <br>
+              <span id="prevLabel">Level Up Tips</span>
+            </span>
+          </a>
+          <a href="#" class="nav-link next" id="nextBtn" onclick="navigate('next')">
+            <span class="nav-text">
+              <span class="button_prelabel">Next:</span>
+              <br>
+              <span id="nextLabel">Level Up Tips</span>
+            </span>
+            <div class="nav-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+
+      </div>
+
+      <!-- Fixed logo header -->
+      <div class="logo-header-wrapper">
+        <div class="logo-header">
+            <a href="https://www.checkmywriting.ai" target="_self">
+            <img class="logo-header-img" src="images/logo.png">
+            </a>
+        </div>
+        <div id="upgrade_link">upgrade</div>
+      </div>
+
+</body>
+
+<script src="results.js"></script>
+
+<footer style="visibility: hidden;">© 2025 CheckMyWritingAI Inc. All rights reserved.</footer>
+
+<script>
+
+document.querySelector('.grade-level-link').addEventListener('click', () => {
+  showWritingLevel();
+});
+
+document.querySelector('.grade-level-link2').addEventListener('click', () => {
+  showWritingLevel();
+});
+
+
+function showWritingLevel() {
+  Swal.fire({
+    title: "Writing Skills by Grade Level",
+    html: `
+        <div class="level_all>">
+
+        <p style="padding-bottom: 15px; line-height: 1.35;">This app helps your child master these key writing skills at each grade level.</p>
+
+        <hr style="margin: 1em auto; border: none; height: 1px; width: 80%; background-color: #b0b0b0;" />
+
+        <div class="level_header">Grades 1-2: Foundational Skills</div><br>
+        •	<span class="level_sub_header">Basic Spelling:</span> phonetic words.<br>
+        •	<span class="level_sub_header">Basic Grammar:</span> simple subject-verb agreement and short sentences.<br>
+        •	<span class="level_sub_header">Basic Punctuation:</span> periods, question marks, capital letters.<br>
+        •	<span class="level_sub_header">Basic Vocabulary:</span> everyday words and simple meanings.<br><br>
+
+        <div class="level_header">Grades 3-4: Sentence Clarity & Structure</div><br>
+        •	<span class="level_sub_header">Intermediate Spelling:</span> multisyllabic and irregular words.<br>
+        •	<span class="level_sub_header">Intermediate Grammar:</span> consistent verb tenses and sentence variety.<br>
+        •	<span class="level_sub_header">Punctuation:</span> commas, apostrophes, quotation marks.<br>
+        •	<span class="level_sub_header">Vocabulary Expansion:</span> broader word choices.<br>
+        •	<span class="level_sub_header">Descriptive Writing:</span> simple adjectives and sensory details.<br><br>
+
+        <div class="level_header">Grades 5-6: Complex Sentences & Precision</div><br>
+        •	<span class="level_sub_header">Advanced Spelling:</span> irregular patterns, silent letters.<br>
+        •	<span class="level_sub_header">Advanced Grammar:</span>  complex sentences and correct modifier placement.<br>
+        •	<span class="level_sub_header">Punctuation Mastery:</span> colons, semicolons, dialogue punctuation.<br>
+        •	<span class="level_sub_header">Vocabulary Precision:</span> nuanced and expressive word use.<br>
+        •	<span class="level_sub_header">Descriptive Reflection:</span> vivid details and personal insight.<br>
+        •	<span class="level_sub_header">Basic Argumentation:</span> supporting a main claim with basic evidence<br><br>
+
+        <div class="level_header">Grades 7-8: Advanced Writing Skills</div><br>
+        •	<span class="level_sub_header">Run-on Sentences:</span> correcting fused or overly long sentences.<br>
+        •	<span class="level_sub_header">Fragments:</span> avoiding incomplete thoughts.<br>
+        •	<span class="level_sub_header">Modifiers & Pronouns:</span> clear modifier placement and pronoun references.<br>
+        •	<span class="level_sub_header">Parallel Structure:</span> consistency in lists and comparisons.<br>
+        •	<span class="level_sub_header">Conciseness:</span> avoiding redundancy and wordiness<br>
+        •	<span class="level_sub_header">Cohesive Argument:</span> structured reasoning, with strong evidence and effective transitions.<br><br>
+
+        <hr style="margin: 1em auto; border: none; height: 1px; width: 80%; background-color: #b0b0b0;" />
+
+        <p style="padding-top: 15px; padding-bottom: 20px; line-height: 1.35;">What stage of the writing journey is your child in today?</p>
+
+        </div>
+    `,
+    icon: 'info',
+    confirmButtonText: "Got it!",
+    showClass: {
+      popup: `
+        animate__animated
+        animate__fadeInUp
+        animate__faster
+      `
+    },
+    hideClass: {
+      popup: `
+        animate__animated
+        animate__fadeOutDown
+        animate__faster
+      `
+    }
+  });
+}
+
+</script>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckMyWriting.AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Importing Raleway font -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Cropper.js CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <link rel="stylesheet" href="homepage.css">
+
+</head>
+
+<body class="bg-white items-center relative flex" style="align-items: center; flex-flow: column wrap;">
+
+    <div class="logo-header">
+        <img class="logo-header-img" src="images/logo.png" alt="Write Strong AI Logo">
+    </div>
+
+    <div class="max-w-md w-full bg-white p-4 rounded-2xl">
+
+      <!-- TITLE AREA -->
+      <div class="title-area text-center mt-5 mb-6">
+          <h5 class="text-[1rem] mt-3 mb-2">Welcome back, <span id="user_id">dtango</span></h5>
+          <h2 class="text-[1.5rem] font-bold text-gray-800 font-[Raleway]">Upload anything, get instant<br>writing feedback!</h2>
+          <h3 class="text-[.9rem] text-gray-700 mt-2 font-[Raleway]">Handwritten or typed—homework, diaries, and more!</h3>
+      </div>
+
+        <!-- HOW IT WORKS (2 STEPS) -->
+
+        <div class="mt-4 mb-7 p-4 bg-gray-50 rounded-2xl shadow-lg flex flex-col items-center w-full upload-container">
+
+            <div class="flex gap-8 pt-4 pb-5">
+                <!-- Take Photo Button -->
+                <button id="cameraButton" class="w-26 h-26 flex flex-col items-center justify-center p-4 bg-blue-50 border border-blue-200 rounded-xl shadow-md focus:outline-none hover:shadow-xl transition upload-button" onclick="openCamera()">
+                    <i class="ph ph-camera text-blue-500 text-5xl"></i>
+                    <span class="text-gray-700 text-sm mt-2 font-medium">Take Photo</span>
+                </button>
+                <!-- Upload File Button -->
+                <button class="w-26 h-26 flex flex-col items-center justify-center p-4 bg-blue-50 border border-blue-200 rounded-xl shadow-md focus:outline-none hover:shadow-xl transition upload-button" onclick="openGallery()">
+                    <i class="ph ph-upload text-blue-500 text-5xl"></i>
+                    <span class="text-gray-700 text-sm mt-2 font-medium">Upload File</span>
+                </button>
+                <input type="file" id="writing-file" accept="image/*,application/pdf,.doc,.docx,.txt,text/plain" multiple style="display:none;" onchange="handleFileSelect(this)">
+            </div>
+
+            <!-- File Status Container -->
+            <div id="fileStatusContainer" class="hidden w-[80%] mt-2 mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between" style="display: none;">
+                <div id="fileNameDisplay" class="flex-grow"></div>
+            </div>
+
+            <!-- Feedback Button -->
+            <button id="feedbackBtn" class="text-[1.2rem] w-[85%] mt-5 py-4 mb-4 bg-[#FF7A59] text-white font-medium rounded-lg shadow-lg hover:bg-[#E86C4D] transition focus:outline-none mx-auto disabled" style="line-height: 1.75;">
+                Check My Writing Now! ✨<br>
+            </button>
+
+        </div>
+
+        <!-- YOUR PREMIUM BENEFITS -->
+        <div class="help-section mt-10 pt-8 pb-8">
+            <p class="text-[1.1rem] text-gray-800 font-bold mb-5 text-center">🌟 Your Premium Benefits:</p>
+            <div class="w-[90%] flex flex-col items-start mx-auto space-y-4">
+              <!-- <p><b>✓ &nbsp;Unlimited Feedback (no caps)</b><br>Submit essays, diaries, stories—anything!</p>
+              <p><b>✓ &nbsp;Advanced AI Deep Dives</b><br>Unlock creativity + level up writing quicker!</p>
+              <p><b>✓ &nbsp;Priority Customer Support</b><br>We'll respond fast (usually within 24 hours!)</p> -->
+              <p><b>✓ &nbsp;Unlimited Feedback</b>—no limits</p>
+              <p><b>✓ &nbsp;AI Deep Dives</b>—level up writing fast</p>
+              <p><b>✓ &nbsp;Priority Support</b>—24-hour response</p>
+            </div>
+            <div class="w-[90%] flex flex-col items-start mt-6 mx-auto space-y-4">
+              <p><span style="color: red;"><b>P.S. Your work STAYS YOURS</b></span>—we never write for you or replace your ideas! ✨  </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WHY US? -->
+    <section class="max-w-md w-full bg-white p-6 rounded-xl">
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial flex items-start bg-gray-50 rounded-lg p-4 shadow-sm">
+          <img src="images/portrait2.jpg" alt="Portrait of Teacher" class="rounded-full w-[70px] h-[70px] mr-4">
+          <blockquote class="text-[.9rem] text-gray-700 italic leading-relaxed">
+              “This app’s feedback helped my students’ confidence soar!”— <span style="color: #777777;">Rachel Shepherd, Grade 5 Teacher · Shenzhen</span>
+          </blockquote>
+      </div>
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial flex items-start bg-gray-50 rounded-lg p-4 mb-6 shadow-sm">
+            <img src="images/portrait1.jpg" alt="Portrait of Parent" class="rounded-full w-[70px] h-[70px] mr-4">
+            <blockquote class="text-[.9rem] text-gray-700 italic leading-relaxed">
+                “Finally, an ethical AI tool writing that *teaches*!”—<span style="color: #777777;">Mei Lin, Mom of 8-year-old · Hong Kong</span>
+            </blockquote>
+        </div>
+
+    </section>
+
+    <section class="mt-0 max-w-md w-full bg-white p-6">
+        <h2 class="text-[1.4rem] font-bold text-gray-800 text-center mb-6 font-[Raleway]">Need help?</h2>
+        <div class="w-[90%] flex flex-col items-center mx-auto space-y-4">
+          <p>📧 support@checkmywriting.ai &nbsp;|&nbsp; 💬 Live Chat</p>
+          <p>Meet the dad behind the app →</p>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="mt-8 py-6 text-center text-[.85rem] text-green-700 border-t border-gray-200">
+        © 2025 CheckMyWritingAI Inc. All rights reserved.
+    </footer>
+
+    <!-- Loading popup -->
+<div id="loadingPopup" class="loading-popup">
+<div class="loading-spinner"></div>
+<div class="loading-text">Analyzing your writing...</div>
+</div>
+
+</body>
+
+<script src="app.js"></script>
+
+</html>

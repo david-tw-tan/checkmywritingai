@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckMyWriting.AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+
+    <!-- Importing Raleway font -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Cropper.js CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <link rel="stylesheet" href="homepage.css">
+
+</head>
+
+<body class="bg-white items-center relative flex" style="align-items: center; flex-flow: column wrap;">
+
+    <div class="logo-header">
+        <img class="logo-header-img" src="images/logo.png" alt="Write Strong AI Logo">
+    </div>
+
+    <div class="max-w-md w-full bg-white p-4 rounded-2xl">
+
+      <!-- TITLE AREA -->
+      <div class="title-area text-center mt-4 mb-6">
+          <h2 class="text-[1.15rem] font-bold text-gray-800 font-[Raleway]">Fast, Personalized Writing Feedback</h2>
+          <h5 class="text-[1rem] text-gray-700 mt-3 font-[Raleway]">✏️&thinsp; For young writers in grades 3-6</h5>
+          <h5 class="text-[1rem] mt-3">Only feedback&thinsp;—<span style="font-style: normal; color: #E53E3E; font-weight: 600;"> 🚫 <i>AI <b>never</b> writes for you</i>!</span></h5>
+      </div>
+
+
+        <!-- HOW IT WORKS (2 STEPS) -->
+        <div class="mt-4 mb-7 p-4 bg-gray-50 rounded-2xl shadow-lg flex flex-col items-center w-full upload-container">
+
+            <!-- STEP 1: Snap & Send -->
+            <p id="step1Label" class="text-[1.05rem] step-label text-center mt-1">STEP 1: Upload Photo&thinsp; 📸<br>
+              <span class="text-[.85rem] text-gray-500" style="font-weight: 400;">
+                  ✓&thinsp;&hairsp;Handwritten stories &nbsp;&thinsp;✓&thinsp;&hairsp;Typed homework
+              </span>
+            <div class="flex gap-8 pt-4 pb-4">
+                <!-- Upload File Button -->
+                <button class="w-56  h-32 flex flex-col items-center justify-center p-4 bg-blue-50 border border-blue-200 rounded-xl shadow-md focus:outline-none hover:shadow-xl transition upload-button" onclick="openGallery()">
+                    <i class="ph ph-camera text-blue-500 text-6xl"></i>
+                    <span class="text-gray-700 text-[.7rem]  mt-2 font-medium">Choose Photo</span>
+                </button>
+                <input type="file" id="writing-file" accept="image/*,application/pdf,.doc,.docx,.txt,text/plain" multiple style="display:none;" onchange="handleFileSelect(this)">
+            </div>
+
+            <!-- File Status Container -->
+            <div id="fileStatusContainer" class="hidden w-[80%] mt-2 mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between" style="display: none;">
+                <div id="fileNameDisplay" class="flex-grow"></div>
+            </div>
+
+            <!-- STEP 2: Get Feedback in 60 Seconds -->
+            <p class="text-[1.05rem] step-label text-center mt-5 mb-5">STEP 2: Get Feedback&thinsp; 🔍<br>
+                <span class="text-[.85rem] text-gray-500" style="font-weight: 400;">
+                    ✓&thinsp;&hairsp;See errors &nbsp;&thinsp;✓&thinsp;&hairsp;Learn rules &nbsp;&thinsp;✓&thinsp;&hairsp;Advanced tips
+                </span>
+            </p>
+
+            <!-- Feedback Button -->
+            <button id="feedbackBtn" class="text-[1.2rem] w-[85%] py-6 mb-4 bg-[#FF7A59] text-white font-medium rounded-lg shadow-lg hover:bg-[#E86C4D] transition focus:outline-none mx-auto disabled" style="line-height: 1.5;">
+                Check My Writing Now! ✨<br>
+            </button>
+
+        </div>
+
+        <!-- OUR 3 PART FEEDBACK METHOD -->
+        <div class="help-section mt-10">
+            <p class="text-[1.1rem] text-gray-800 font-bold mb-4 text-center">Our 3-Part Writing Feedback</p>
+            <div class="flex flex-col items-start mx-auto space-y-4">
+                <!-- Find Mistakes -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">🔍</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Find Mistakes:</b><br>
+                        <span style="color: #444444">"I <span style="color: red"><u>goed</u></span> to park." → "I <span style="color: forestgreen"><u>went</u></span> to the park."</span>
+                    </p>
+                </div>
+                <!-- Teach Rules -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">📚</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Teach Rules:</b><br>
+                        <span style="color: #444444">'Went' = past tense of 'go'.</span>
+                    </p>
+                </div>
+                <!-- Give Improvement Tips -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">🚀</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Give Improvement Tips:</b><br>
+                        <span style="color: #444444">Add some detail → "... near my old school."</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WE HELP YOU IMPROVE, NOT WRITE FOR YOU -->
+        <div class="help-section mt-8">
+            <p class="text-[1.1rem] text-gray-800 font-bold mb-4 text-center">
+                AI For <i>Learning</i> to Write<br>
+                <span class="text-[1rem] text-gray-400">(Not AI That Writes For You)</span>
+            </p>
+            <div class="flex flex-col items-start mx-auto space-y-4">
+                <!-- Start with your own work -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">📝</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Your work, your words:</b><br>
+                        <span style="color: #444444">No AI-generated essays—just feedback.</span>
+                    </p>
+                </div>
+                <!-- Growth over shortcuts -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">🌱</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Growth over shortcuts:</b><br>
+                        <span style="color: #444444">We help <i>improve</i> your ideas, not replace them.</span>
+                    </p>
+                </div>
+                <!-- Safe & ethical -->
+                <div class="flex items-start space-x-4">
+                    <span class="text-[1.8rem]">🛡️</span>
+                    <p class="text-gray-800 text-[.9rem] leading-relaxed">
+                        <b>Safe & ethical:</b><br>
+                        <span style="color: #444444">Built to protect academic integrity.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr class="w-3/4 mx-auto my-2 border-gray-300">
+
+    <!-- WHY US? -->
+    <section class="mt-3 mb-2 max-w-md w-full bg-white p-6 rounded-xl">
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial flex items-start bg-gray-50 rounded-lg p-4 shadow-sm">
+          <img src="images/portrait2.jpg" alt="Portrait of Teacher" class="rounded-full w-[70px] h-[70px] mr-4">
+          <blockquote class="text-[.9rem] text-gray-700 italic leading-relaxed">
+              “This app’s feedback helped my students’ confidence soar!”— <span style="color: #777777;">Rachel Shepherd, Grade 5 Teacher · Shenzhen</span>
+          </blockquote>
+      </div>
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial flex items-start bg-gray-50 rounded-lg p-4 mb-4 shadow-sm">
+            <img src="images/portrait1.jpg" alt="Portrait of Parent" class="rounded-full w-[70px] h-[70px] mr-4">
+            <blockquote class="text-[.9rem] text-gray-700 italic leading-relaxed">
+                “Finally, an ethical AI tool writing that *teaches*!”—<span style="color: #777777;">Mei Lin, Mom of 8-year-old · Hong Kong</span>
+            </blockquote>
+        </div>
+
+    </section>
+
+    <hr class="w-3/4 mx-auto my-2 border-gray-300">
+
+    <!-- WHO'S BEHIND THE APP? -->
+
+    <section class="mt-5 max-w-md w-full bg-white p-6 rounded-xl shadow-md">
+        <h2 class="text-[1.4rem] font-bold text-gray-800 text-center mb-6 font-[Raleway]">The Dad Behind the App</h2>
+        <div class="flex flex-col items-center text-center">
+            <img src="images/david_clara.jpg" alt="David and Clara" class="w-[175px] h-auto mb-6 rounded-lg shadow-sm">
+            <p class="text-[.95rem] text-gray-700 leading-relaxed mb-4">
+                <b>Hi! I’m David, a Beijing dad</b>. I built this app for my 8-year-old as she started writing more in school.
+            </p>
+            <p class="text-[.95rem] text-gray-700 leading-relaxed mb-4">
+                Most AI tools write for you—<b>this one actually <u>teaches kids</u> how to write better!</b> Try it for your child, and let me know how we can improve—I read every email!</b>!
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-6 py-6 text-center text-[.85rem] text-green-700">
+        © 2025 CheckMyWritingAI Inc. All rights reserved.
+    </footer>
+
+    <!-- Loading popup -->
+<div id="loadingPopup" class="loading-popup">
+<div class="loading-spinner"></div>
+<div class="loading-text">Analyzing your writing...</div>
+</div>
+
+</body>
+
+<script src="app.js"></script>
+
+</html>

@@ -50,15 +50,29 @@ body {
 #upgrade_link {
   position: absolute;
   right: 0;
-  padding-right: 8px;
+  padding-right: 4%;
   margin-top: -8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 9pt;
+  font-family: Helvetica;
+  font-weight: 500;
+  font-size: 8pt;
   color: yellow;
-  opacity: .85;
+  opacity: 0; /* hide for now */
+}
+
+.upgrade_link_underline {
   text-decoration: underline;
-  text-decoration-thickness: .5px;
+  text-decoration-thickness: .3px;
+}
+
+@media only screen and (min-width: 768px) {
+  /* Desktop styles */
+  #upgrade_link {
+    padding-right: 8%;
+    margin-top: -4px;
+    font-size: 12pt;
+  }
 }
 
 .container {

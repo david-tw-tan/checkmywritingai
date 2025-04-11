@@ -642,7 +642,12 @@ footer {
 /* ADDITIONAL */
 
 #whole_page_wrapper {
-  opacity: 0;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#whole_page_wrapper.fade-in {
+    opacity: 1;
 }
 
 .fade-in {

@@ -622,32 +622,6 @@ function closeCropInterface(imageDataUrl, file) {
     }
 }
 
-// Adjust top padding so it starts below fixed logo header + fade in whole_page_wrapper
-document.addEventListener('DOMContentLoaded', function () {
-    // Select the logo header element
-    const logoHeader = document.querySelector('.logo-header');
-    const body = document.body;
-
-    // Function to update body padding dynamically
-    function updateBodyPadding() {
-        const headerHeight = logoHeader.offsetHeight; // Get the height of the header
-        body.style.paddingTop = `${headerHeight}px`; // Apply it as padding-top to the body
-    }
-
-    // Update padding on page load
-    updateBodyPadding();
-
-    // Update padding on window resize (to handle responsive design)
-    window.addEventListener('resize', updateBodyPadding);
-
-    // fade in whole_page_wrapper
-    setTimeout(() => {
-      const myDiv = document.getElementById("whole_page_wrapper");
-      myDiv.classList.add("fade-in");
-    }, 250);
-
-});
-
 // Adjust scrolling of window after selecting photo so that "Check My Writing Now" button appears above the fold
 function scrollToContent() {
   // Get the height of the fixed header
@@ -663,3 +637,34 @@ function scrollToContent() {
     behavior: 'smooth'
   });
 }
+
+// Adjust top padding so it starts below fixed logo header + fade in whole_page_wrapper
+document.addEventListener('DOMContentLoaded', function () {
+    const logoHeader = document.querySelector('.logo-header');
+    const body = document.body;
+
+    function updateBodyPadding() {
+        const headerHeight = logoHeader.offsetHeight;
+        body.style.paddingTop = `${headerHeight}px`;
+    }
+
+    updateBodyPadding();
+    window.addEventListener('resize', updateBodyPadding);
+
+    // Wait for whole_page_wrapper to exist
+    function waitForElement(selector, callback) {
+        const interval = setInterval(() => {
+            const element = document.getElementById(selector);
+            if (element) {
+                clearInterval(interval);
+                callback(element);
+            }
+        }, 100); // Check every 100ms
+    }
+
+    waitForElement('whole_page_wrapper', (myDiv) => {
+        setTimeout(() => {
+            myDiv.classList.add("fade-in");
+        }, 250);
+    });
+});
